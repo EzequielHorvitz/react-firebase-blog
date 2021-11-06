@@ -10,6 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import { set_user } from "../Store/action";
 import "../Css/addpost.css";
+import axios from "axios";
 
 function AddPost(props) {
   const history = useHistory();
@@ -21,7 +22,10 @@ function AddPost(props) {
 
   const [userName, setUserName] = useState("");
   const [userId, setUserid] = useState("");
-
+  
+  const handleOnSubmit = (object) => {
+    
+  };
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -39,6 +43,7 @@ function AddPost(props) {
   }, [history, props]);
   const success = () => {
     const key = firebase.database().ref("posts").push().key;
+    try{
     firebase
       .database()
       .ref("posts/" + key)
@@ -50,7 +55,27 @@ function AddPost(props) {
         host: userName,
         postType: postType,
       });
-
+    }catch(error){
+      console.log("firebase".error)
+    }    
+    axios
+      .post("https://api-ezequiel.herokuapp.com/item/add",{
+        key: key,
+        description: description,
+        post: post,
+        hostid: userId,
+        host: userName,
+        postType: postType,
+      })
+      .then(response => {
+        console.log("entro")
+        return response;
+      })
+      .catch(
+        error => {
+          return error;
+        }
+      );
     alert("Post Uploaded Success");
     history.push("/dashboard");
   };

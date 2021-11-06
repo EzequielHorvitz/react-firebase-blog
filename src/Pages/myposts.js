@@ -8,11 +8,21 @@ import "../Css/dashboard.css";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import user from "../Images/user.png";
+import axios from "axios";
+
+const api = axios.create({
+  baseUrl: "http://localhost:3000/dashboard",
+});
+
 
 function MyPosts(props) {
   const history = useHistory();
 
   const [posts, setPosts] = useState([]);
+
+
+
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
