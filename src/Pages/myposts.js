@@ -10,19 +10,22 @@ import AddIcon from "@material-ui/icons/Add";
 import user from "../Images/user.png";
 import axios from "axios";
 
-const api = axios.create({
-  baseUrl: "http://localhost:3000/dashboard",
-});
-
-
 function MyPosts(props) {
   const history = useHistory();
 
   const [posts, setPosts] = useState([]);
+  const [data, setData] = useState([]);
 
-
-
-
+  const getPosts = () => {
+    axios
+      .getPosts("https://api-ezequiel.herokuapp.com/item/get", {})
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        return error;
+      });
+  };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -62,7 +65,20 @@ function MyPosts(props) {
 
   const deletepost = (key) => {
     firebase.database().ref("posts").child(key).remove();
+    axios
+    .delete("http://localhost:5000/item/delete" + key)
+    .then(response => {
+        
+      return response;
+    })
+    .catch(
+      error => {
+        return error;
+      }
+    );
+
   };
+  alert("Post Deleted Success");
   return (
     <>
       <Header />
@@ -70,6 +86,7 @@ function MyPosts(props) {
       <div
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
+     
         {posts.map((v, i) => {
           return (
             <div className="containers" key={i}>

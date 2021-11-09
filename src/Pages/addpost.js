@@ -68,7 +68,7 @@ function AddPost(props) {
         postType: postType,
       })
       .then(response => {
-        console.log("entro")
+        
         return response;
       })
       .catch(
