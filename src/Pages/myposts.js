@@ -66,19 +66,15 @@ function MyPosts(props) {
   const deletepost = (key) => {
     firebase.database().ref("posts").child(key).remove();
     axios
-    .delete("http://localhost:5000/item/delete" + key)
-    .then(response => {
-        
-      return response;
-    })
-    .catch(
-      error => {
+      .delete("http://localhost:5000/item/delete" + key)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
         return error;
-      }
-    );
-
+      });
   };
-  alert("Post Deleted Success");
+ 
   return (
     <>
       <Header />
@@ -86,7 +82,6 @@ function MyPosts(props) {
       <div
         style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
-     
         {posts.map((v, i) => {
           return (
             <div className="containers" key={i}>

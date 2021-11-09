@@ -1,4 +1,4 @@
-This capstone proyect creates a functional, responsive blog, using react, python, redux, scss, css, firebase and javascript. The app is deployed in heroku in the following link: https://react-capstone-project.herokuapp.com/dashboard
+This capstone proyect creates a functional, responsive blog, using react, python, redux, scss, css, firebase and javascript. The app is deployed in heroku in the following link: https://react-capstone-project.herokuapp.com/
 
 In the blog, a User can register, login, add, edit and delete post and see all his post and all the post from someone else. 
 
